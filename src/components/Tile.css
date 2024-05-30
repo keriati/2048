@@ -1,0 +1,24 @@
+.tile {
+    float:left;
+    width: 46px;
+    height: 46px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 3px;
+    margin: 1px;
+    background: white;
+    border: 1px black solid;
+    font-size: 24px;
+}
+
+.tile-2 { background: #4cc9f0}
+.tile-4 { background: #4895ef}
+.tile-8 { background: #4361ee}
+.tile-16 { background: #3f37c9; color: white}
+.tile-32 { background: #3a0ca3; color: white}
+.tile-64 { background: #480ca8; color: white}
+.tile-128 { background: #560bad; color: white}
+.tile-256 { background: #7209b7; color: white}
+.tile-512 { background: #b5179e; color: white}
+.tile-1024 { background: #f72585; color: white}
+.tile-2048 { background: #04e762; color: white}
