@@ -1,0 +1,9 @@
+.game {
+    display: flex;
+    margin: 50px;
+    min-width: 800px
+}
+
+.title-2048 {
+    text-align: center;
+}

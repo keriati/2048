@@ -7,8 +7,9 @@
     border-radius: 3px;
     margin: 1px;
     background: white;
-    border: 1px black solid;
+    border: 1px #eee solid;
     font-size: 24px;
+    /*box-shadow: inset 0px 0px 3px 0px #7209b7;*/
 }
 
 .tile-2 { background: #4cc9f0}
