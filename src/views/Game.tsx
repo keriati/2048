@@ -1,5 +1,5 @@
 import './Game.css';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Game2048, GameBoard } from '../lib/Game2048.ts';
 import { Board } from '../components/Board.tsx';
 import { Button, Form, Select, Switch } from 'antd';
@@ -8,7 +8,7 @@ const KEY_LEFT = 'ArrowLeft';
 const KEY_UP = 'ArrowUp';
 const KEY_RIGHT = 'ArrowRight';
 const KEY_DOWN = 'ArrowDown';
-const AUTOPLAY_INPUT_DELAY = 200;
+const AUTOPLAY_INPUT_DELAY = 50;
 const DEFAULT_SIZE = 6;
 
 export const Game: FC = () => {
@@ -21,7 +21,7 @@ export const Game: FC = () => {
   const [autoPlay, setAutoPlay] = useState(true);
   const [autoPlayTimer, setAutoPlayTimer] = useState<number>(0);
 
-  const checkGame = () => {
+  const checkGame = useCallback(() => {
     if (game.isWon()) {
       setWon(true);
       return;
@@ -32,38 +32,44 @@ export const Game: FC = () => {
     } else {
       if (game.isLost()) setLost(true);
     }
-  };
+  }, [easyMode, game]);
 
   const handleSizeSelect = (newSize: number) => {
     setSize(newSize);
   };
 
   const handleStart = () => {
-    setLost(false);
-    setWon(false);
-    setAutoPlay(false);
     clearTimeout(autoPlayTimer);
-    setGame(new Game2048(size, size));
+    setAutoPlay(false);
+    setTimeout(() => {
+      setLost(false);
+      setWon(false);
+      setGame(new Game2048(size, size));
+    }, AUTOPLAY_INPUT_DELAY);
   };
 
   useEffect(() => {
-    if (autoPlay) {
+    if (autoPlay && !lost && !won) {
       const timeoutId = setTimeout(() => {
         if (autoPlay) {
           game.down();
           setBoard(game.board);
+          if (game.isLost()) {
+            setAutoPlay(false);
+          }
         }
       }, AUTOPLAY_INPUT_DELAY);
+
       setAutoPlayTimer(timeoutId);
     }
-  }, [autoPlay, board]);
+  }, [autoPlay, game, board, lost, won]);
 
   useEffect(() => {
     setBoard(game.board);
   }, [game]);
 
   useEffect(() => {
-    if (autoPlay) return;
+    if (autoPlay || lost || won) return;
 
     const keyDownHandler = (event: KeyboardEvent) => {
       if (lost || won) return;
@@ -97,7 +103,7 @@ export const Game: FC = () => {
     return () => {
       window.removeEventListener('keydown', keyDownHandler);
     };
-  }, [game, board]);
+  }, [game, board, autoPlay, lost, won, checkGame]);
 
   return (
     <>
