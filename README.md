@@ -1,8 +1,8 @@
 # 2048 Game
 
-Implementation of the 2048 Game. For Specifications see the [2048.pdf](2048.pdf) file.
+For detailed specifications, please refer to the [2048.pdf](2048.pdf) file.
 
-The app is using ReactJS and Ant Design, rather as a "lite" technical showcase.
+This application is built using ReactJS and Ant Design, serving as a streamlined technical showcase.
 
 ## Running the App
 
