@@ -235,5 +235,15 @@ describe('Game2048', () => {
 
       expect(game.isLostEasyMode()).toBeFalsy();
     });
+
+    it('returns false if the game is not lost 3', () => {
+      const game = new Game2048(2, 2);
+      game.board = [
+        [0, 2],
+        [4, 16],
+      ];
+
+      expect(game.isLostEasyMode()).toBeFalsy();
+    });
   });
 });

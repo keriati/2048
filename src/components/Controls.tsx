@@ -10,10 +10,11 @@ interface Props {
 export const Controls = ({ onSizeChange, onEasyMode, onStart }: Props) => (
   <Form labelCol={{ span: 8 }} wrapperCol={{ span: 6 }} layout="horizontal">
     <Form.Item label="Easy Mode" valuePropName="checked">
-      <Switch onClick={onEasyMode} />
+      <Switch onClick={onEasyMode} data-testid="easy-mode-switch" />
     </Form.Item>
+
     <Form.Item label="Board Size" name="size" initialValue={DEFAULT_SIZE.join('x')}>
-      <Select onChange={onSizeChange}>
+      <Select onChange={onSizeChange} data-testid="size-select">
         {BOARD_SIZES.map(([width, height]) => {
           const sizeString = `${width.toString()}x${height.toString()}`;
           return (
@@ -27,8 +28,9 @@ export const Controls = ({ onSizeChange, onEasyMode, onStart }: Props) => (
         })}
       </Select>
     </Form.Item>
+
     <Form.Item wrapperCol={{ offset: 8, span: 8 }}>
-      <Button type="primary" onClick={onStart}>
+      <Button type="primary" onClick={onStart} data-testid="start-button">
         Start!
       </Button>
     </Form.Item>

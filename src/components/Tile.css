@@ -9,7 +9,6 @@
     background: white;
     border: 1px #eee solid;
     font-size: 24px;
-    /*box-shadow: inset 0px 0px 3px 0px #7209b7;*/
 }
 
 .tile-2 { background: #4cc9f0}
@@ -21,5 +20,5 @@
 .tile-128 { background: #560bad; color: white}
 .tile-256 { background: #7209b7; color: white}
 .tile-512 { background: #b5179e; color: white}
-.tile-1024 { background: #f72585; color: white}
-.tile-2048 { background: #04e762; color: white}
+.tile-1024 { background: #f72585; color: white; font-size: 18px}
+.tile-2048 { background: #04e762; color: white; font-size: 18px}

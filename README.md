@@ -46,8 +46,17 @@ template.
 
 The app is using `npm` as package manager.
 
-The following tools are set up for code quality:
+The following tools are set up for code and functional quality:
+
  - ESLint
  - Prettier
  - TypeScript
  - Vitest
+ - React Testing Library
+
+The project uses `strict-type-checked` eslint TypeScript rules. It also has a high unit test coverage. The main business logic is decoupled from the view layer, making it reusable.
+
+## License
+
+This project is open source and available under the MIT License.
+Copyright 2024 Attila Kerekes
