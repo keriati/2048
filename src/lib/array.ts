@@ -5,7 +5,7 @@ export const shuffleArray = <T>(array: T[]) => {
   }
 };
 
-export const arraySplit = <T>(array: T[], divider: string | number): T[][] => {
+export const splitArray = <T>(array: T[], divider: string | number): T[][] => {
   const chunks: T[][] = [];
   let chunk: T[] = [];
 
@@ -23,7 +23,7 @@ export const arraySplit = <T>(array: T[], divider: string | number): T[][] => {
   return chunks;
 };
 
-export const arrayJoin = <T>(array: T[][], separator: T) => {
+export const joinArrays = <T>(array: T[][], separator: T) => {
   let result: T[] = [];
 
   for (let i = 0; i < array.length; i++) {

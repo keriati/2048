@@ -1,4 +1,4 @@
-import { arrayJoin, arraySplit, shuffleArray } from '../array.ts';
+import { joinArrays, splitArray, shuffleArray } from '../array.ts';
 import { expect } from 'vitest';
 
 describe('Array Functions', () => {
@@ -35,7 +35,7 @@ describe('Array Functions', () => {
       const myArray = [0, 0, 0, 1, 0, 0];
       const divider = 1;
 
-      const actual = arraySplit(myArray, divider);
+      const actual = splitArray(myArray, divider);
 
       expect(actual).toEqual([
         [0, 0, 0],
@@ -47,7 +47,7 @@ describe('Array Functions', () => {
       const myArray = [1, 1, 0];
       const divider = 1;
 
-      const actual = arraySplit(myArray, divider);
+      const actual = splitArray(myArray, divider);
 
       expect(actual).toEqual([[], [], [0]]);
     });
@@ -61,7 +61,7 @@ describe('Array Functions', () => {
       ];
       const divider = 1;
 
-      const actual = arrayJoin(myArray, divider);
+      const actual = joinArrays(myArray, divider);
 
       expect(actual).toEqual([0, 0, 1, 0, 0]);
     });
@@ -70,7 +70,7 @@ describe('Array Functions', () => {
       const myArray = [[], [], [0]];
       const divider = 1;
 
-      const actual = arrayJoin(myArray, divider);
+      const actual = joinArrays(myArray, divider);
 
       expect(actual).toEqual([1, 1, 0]);
     });

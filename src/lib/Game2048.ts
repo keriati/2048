@@ -1,5 +1,5 @@
 import { rotateClockwise, rotateCounterClockwise } from './matrix.ts';
-import { arrayJoin, arraySplit, shuffleArray } from './array.ts';
+import { joinArrays, splitArray, shuffleArray } from './array.ts';
 
 export type GameBoard = number[][];
 export type BoardSize = [number, number];
@@ -70,11 +70,11 @@ export class Game2048 {
 
   static moveRowLeft(row: number[]): number[] {
     if (row.includes(OBSTACLE_CODE)) {
-      const parts = arraySplit(row, OBSTACLE_CODE);
+      const parts = splitArray(row, OBSTACLE_CODE);
 
       const newParts = parts.map((part) => Game2048.moveRowLeft(part));
 
-      return arrayJoin(newParts, OBSTACLE_CODE);
+      return joinArrays(newParts, OBSTACLE_CODE);
     }
 
     const newRow = row.filter((n) => n != 0);
