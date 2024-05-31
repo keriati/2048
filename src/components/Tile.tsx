@@ -1,10 +1,10 @@
 import './Tile.css';
 import { FC } from 'react';
 
-export const Tile: FC<{ value: number }> = ({ value }) => {
-  return (
-    <div data-testid="board-tile" className={`tile tile-${value.toString()}`}>
-      {value}
-    </div>
-  );
-};
+type Props = { value: number };
+
+export const Tile: FC<Props> = ({ value }) => (
+  <div data-testid="board-tile" className={`tile tile-${value.toString()}`}>
+    {value}
+  </div>
+);

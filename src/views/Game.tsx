@@ -4,7 +4,7 @@ import { Game2048, GameBoard } from '../lib/Game2048.ts';
 import { Board } from '../components/Board.tsx';
 import {
   AUTOPLAY_INPUT_DELAY,
-  AUTOPLAY_NEW_TWO_COUNT,
+  DEFAULT_OBSTACLES,
   DEFAULT_SIZE,
   KEY_DOWN,
   KEY_LEFT,
@@ -15,12 +15,15 @@ import { parseSize } from './GameServices.ts';
 import { useAutoPlay } from '../hooks/useAutoPlay.ts';
 import { Header } from '../components/Header.tsx';
 import { Controls } from '../components/Controls.tsx';
+import type { RadioChangeEvent } from 'antd/lib';
 
 type GameControls = 'up' | 'down' | 'left' | 'right';
 
-export const Game: FC = () => {
+type Props = { game: Game2048; setGame: (game: Game2048) => void };
+
+export const Game: FC<Props> = ({ game, setGame }) => {
   const [boardSize, setBoardSize] = useState(DEFAULT_SIZE);
-  const [game, setGame] = useState<Game2048>(new Game2048(boardSize[0], boardSize[1], AUTOPLAY_NEW_TWO_COUNT));
+  const [obstacles, setObstacles] = useState(DEFAULT_OBSTACLES);
   const [board, setBoard] = useState<GameBoard>(game.board);
 
   const [won, setWon] = useState(false);
@@ -55,8 +58,16 @@ export const Game: FC = () => {
     }
   }, [easyMode, game]);
 
+  const handleEasyMode = () => {
+    setEasyMode(!easyMode);
+  };
+
   const handleSizeSelect = (newSize: string) => {
     setBoardSize(parseSize(newSize));
+  };
+
+  const handleObstacleChange = (event: RadioChangeEvent) => {
+    setObstacles(Number(event.target.value));
   };
 
   const handleStart = () => {
@@ -65,8 +76,7 @@ export const Game: FC = () => {
     setLost(false);
     setWon(false);
 
-    const newGame = new Game2048(boardSize[0], boardSize[1]);
-
+    const newGame = new Game2048(boardSize[0], boardSize[1], 1, obstacles);
     setGame(newGame);
     setBoard(newGame.board);
   };
@@ -109,10 +119,6 @@ export const Game: FC = () => {
     };
   }, [game, board, autoPlayActive, lost, won, checkGame, updateBoard]);
 
-  const handleEasyMode = () => {
-    setEasyMode(!easyMode);
-  };
-
   return (
     <div data-testid="game-2048">
       <Header />
@@ -122,7 +128,12 @@ export const Game: FC = () => {
       </div>
 
       <div className="controls">
-        <Controls onEasyMode={handleEasyMode} onSizeChange={handleSizeSelect} onStart={handleStart} />
+        <Controls
+          onEasyMode={handleEasyMode}
+          onSizeChange={handleSizeSelect}
+          onStart={handleStart}
+          onObstacleChange={handleObstacleChange}
+        />
       </div>
     </div>
   );

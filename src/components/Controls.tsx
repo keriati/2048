@@ -1,13 +1,16 @@
-import { Button, Form, Select, Switch } from 'antd';
-import { BOARD_SIZES, DEFAULT_SIZE } from '../constants.ts';
+import { Button, Form, Radio, Select, Switch } from 'antd';
+import { BOARD_SIZES, DEFAULT_OBSTACLES, DEFAULT_SIZE, NUM_OBSTACLES } from '../constants.ts';
+import { FC } from 'react';
+import type { RadioChangeEvent } from 'antd/lib';
 
 interface Props {
   onEasyMode: () => void;
   onSizeChange: (newSize: string) => void;
   onStart: () => void;
+  onObstacleChange: (event: RadioChangeEvent) => void;
 }
 
-export const Controls = ({ onSizeChange, onEasyMode, onStart }: Props) => (
+export const Controls: FC<Props> = ({ onSizeChange, onEasyMode, onStart, onObstacleChange }) => (
   <Form labelCol={{ span: 8 }} wrapperCol={{ span: 6 }} layout="horizontal">
     <Form.Item label="Easy Mode" valuePropName="checked">
       <Switch onClick={onEasyMode} data-testid="easy-mode-switch" />
@@ -27,6 +30,16 @@ export const Controls = ({ onSizeChange, onEasyMode, onStart }: Props) => (
           );
         })}
       </Select>
+    </Form.Item>
+
+    <Form.Item label="Obstacles" name="obstacles" initialValue={DEFAULT_OBSTACLES}>
+      <Radio.Group onChange={onObstacleChange}>
+        {NUM_OBSTACLES.map((obstacleNumber) => (
+          <Radio.Button key={obstacleNumber} value={obstacleNumber}>
+            {obstacleNumber}
+          </Radio.Button>
+        ))}
+      </Radio.Group>
     </Form.Item>
 
     <Form.Item wrapperCol={{ offset: 8, span: 8 }}>

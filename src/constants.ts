@@ -20,3 +20,6 @@ export const BOARD_SIZES: BoardSize[] = [
   [5, 5],
 ];
 export const DEFAULT_SIZE: BoardSize = [6, 6];
+
+export const DEFAULT_OBSTACLES = 0;
+export const NUM_OBSTACLES = [0, 1, 2, 3, 4];

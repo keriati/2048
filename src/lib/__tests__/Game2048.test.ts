@@ -41,6 +41,12 @@ describe('Game2048', () => {
         [2, 2],
       ]);
     });
+
+    it('contains 1 obstacle when defined', () => {
+      const game = new Game2048(2, 2, 1, 1);
+
+      expect(game.board.flat().sort()).toEqual([0, 0, 1, 2]);
+    });
   });
 
   describe('#moveRowLeft()', () => {
@@ -66,6 +72,38 @@ describe('Game2048', () => {
       const newRow = Game2048.moveRowLeft(row);
 
       expect(newRow).toEqual([0, 0, 0, 0]);
+    });
+
+    it('moves numbers against obstacles, obstacle on edge', () => {
+      const row = [1, 0, 2, 0];
+
+      const newRow = Game2048.moveRowLeft(row);
+
+      expect(newRow).toEqual([1, 2, 0, 0]);
+    });
+
+    it('moves numbers against obstacles, obstacle in middle', () => {
+      const row = [0, 1, 0, 2];
+
+      const newRow = Game2048.moveRowLeft(row);
+
+      expect(newRow).toEqual([0, 1, 2, 0]);
+    });
+
+    it('moves numbers against obstacles, obstacle at end', () => {
+      const row = [0, 2, 2, 1];
+
+      const newRow = Game2048.moveRowLeft(row);
+
+      expect(newRow).toEqual([4, 0, 0, 1]);
+    });
+
+    it('moves numbers against obstacles, obstacles on edge', () => {
+      const row = [1, 2, 2, 1];
+
+      const newRow = Game2048.moveRowLeft(row);
+
+      expect(newRow).toEqual([1, 4, 0, 1]);
     });
   });
 

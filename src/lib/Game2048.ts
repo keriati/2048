@@ -1,5 +1,5 @@
 import { rotateClockwise, rotateCounterClockwise } from './matrix.ts';
-import { shuffleArray } from './shuffle.ts';
+import { arrayJoin, arraySplit, shuffleArray } from './array.ts';
 
 export type GameBoard = number[][];
 export type BoardSize = [number, number];
@@ -8,6 +8,8 @@ export const WIN_SCORE = 2048;
 export const HEIGHT = 6;
 export const WIDTH = 6;
 export const STARTING_TWOS = 1;
+export const STARTING_OBSTACLES = 0;
+export const OBSTACLE_CODE = 1;
 
 export class Game2048 {
   board: GameBoard = [];
@@ -16,6 +18,7 @@ export class Game2048 {
     public readonly width = WIDTH,
     public readonly height = HEIGHT,
     public readonly startingTwos: number = STARTING_TWOS,
+    public readonly obstacles: number = STARTING_OBSTACLES,
   ) {
     this.createBoard();
   }
@@ -25,6 +28,10 @@ export class Game2048 {
 
     for (let i = 0; i < this.startingTwos; i++) {
       tiles[i] = 2;
+    }
+
+    for (let i = this.startingTwos; i < this.startingTwos + this.obstacles; i++) {
+      tiles[i] = OBSTACLE_CODE;
     }
 
     shuffleArray(tiles);
@@ -61,7 +68,15 @@ export class Game2048 {
     this.board[newY][newX] = 2;
   }
 
-  static moveRowLeft(row: number[]) {
+  static moveRowLeft(row: number[]): number[] {
+    if (row.includes(OBSTACLE_CODE)) {
+      const parts = arraySplit(row, OBSTACLE_CODE);
+
+      const newParts = parts.map((part) => Game2048.moveRowLeft(part));
+
+      return arrayJoin(newParts, OBSTACLE_CODE);
+    }
+
     const newRow = row.filter((n) => n != 0);
 
     for (let i = 0; i < newRow.length - 1; i++) {
