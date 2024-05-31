@@ -9,12 +9,13 @@ const KEY_UP = 'ArrowUp';
 const KEY_RIGHT = 'ArrowRight';
 const KEY_DOWN = 'ArrowDown';
 const AUTOPLAY_INPUT_DELAY = 50;
+const AUTOPLAY_NEW_TWO_COUNT = 5;
 const DEFAULT_SIZE = 6;
 
 export const Game: FC = () => {
-  const [size, setSize] = useState(DEFAULT_SIZE);
-  const [game, setGame] = useState<Game2048>(new Game2048(size, size));
-  const [board, setBoard] = useState<GameBoard>(game.board);
+  const [boardSize, setBoardSize] = useState(DEFAULT_SIZE);
+  const [game, setGame] = useState<Game2048>(new Game2048(boardSize, boardSize, AUTOPLAY_NEW_TWO_COUNT));
+  const [board, setBoard] = useState<GameBoard>(game?.board);
   const [won, setWon] = useState(false);
   const [lost, setLost] = useState(false);
   const [easyMode, setEasyMode] = useState(false);
@@ -35,7 +36,7 @@ export const Game: FC = () => {
   }, [easyMode, game]);
 
   const handleSizeSelect = (newSize: number) => {
-    setSize(newSize);
+    setBoardSize(newSize);
   };
 
   const handleStart = () => {
@@ -44,7 +45,7 @@ export const Game: FC = () => {
     setTimeout(() => {
       setLost(false);
       setWon(false);
-      setGame(new Game2048(size, size));
+      setGame(new Game2048(boardSize, boardSize));
     }, AUTOPLAY_INPUT_DELAY);
   };
 
@@ -116,7 +117,7 @@ export const Game: FC = () => {
           <Form.Item label="Easy Mode" valuePropName="checked">
             <Switch onClick={() => setEasyMode(!easyMode)} />
           </Form.Item>
-          <Form.Item label="Form Size" name="size" initialValue={DEFAULT_SIZE}>
+          <Form.Item label="Board Size" name="size" initialValue={DEFAULT_SIZE}>
             <Select onChange={handleSizeSelect}>
               <Select.Option value={4}>4x4</Select.Option>
               <Select.Option value={6}>6x6</Select.Option>
