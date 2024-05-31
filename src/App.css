@@ -1,4 +1,5 @@
 body {
     background: #EBF1F4;
     font-family: Helvetica, serif;
+    min-width: 1200px;
 }

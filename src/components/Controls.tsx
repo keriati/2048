@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const Controls: FC<Props> = ({ onSizeChange, onEasyMode, onStart, onObstacleChange }) => (
-  <Form labelCol={{ span: 8 }} wrapperCol={{ span: 6 }} layout="horizontal">
+  <Form labelCol={{ span: 11 }} wrapperCol={{ span: 4 }} layout="horizontal">
     <Form.Item label="Easy Mode" valuePropName="checked">
       <Switch onClick={onEasyMode} data-testid="easy-mode-switch" />
     </Form.Item>
@@ -21,10 +21,7 @@ export const Controls: FC<Props> = ({ onSizeChange, onEasyMode, onStart, onObsta
         {BOARD_SIZES.map(([width, height]) => {
           const sizeString = `${width.toString()}x${height.toString()}`;
           return (
-            <Select.Option
-              value={`${width.toString()}x${height.toString()}`}
-              key={`${width.toString()}x${height.toString()}`}
-            >
+            <Select.Option value={sizeString} key={sizeString}>
               {sizeString}
             </Select.Option>
           );
@@ -42,7 +39,7 @@ export const Controls: FC<Props> = ({ onSizeChange, onEasyMode, onStart, onObsta
       </Radio.Group>
     </Form.Item>
 
-    <Form.Item wrapperCol={{ offset: 8, span: 8 }}>
+    <Form.Item wrapperCol={{ offset: 11, span: 8 }}>
       <Button type="primary" onClick={onStart} data-testid="start-button">
         Start!
       </Button>
