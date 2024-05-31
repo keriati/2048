@@ -7,6 +7,10 @@
     margin: 0 auto;
 }
 
+.board h1 {
+    text-align: center;
+}
+
 board-row {
     width: auto;
 }
