@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-type intervalHook = (
+type AutoPlayHook = (
   callback: (stopAutoPlay: () => void) => void,
   delay: number,
 ) => { autoPlayActive: boolean; stopAutoPlay: () => void };
 
-export const useAutoPlay: intervalHook = (callback, delay) => {
+export const useAutoPlay: AutoPlayHook = (callback, delay) => {
   const [autoPlayActive, setAutoPlayActive] = useState(true);
 
   useEffect(() => {
