@@ -15,9 +15,12 @@ export const Controls = ({ onSizeChange, onEasyMode, onStart }: Props) => (
     <Form.Item label="Board Size" name="size" initialValue={DEFAULT_SIZE.join('x')}>
       <Select onChange={onSizeChange}>
         {BOARD_SIZES.map(([width, height]) => {
-          const sizeString = `${width}x${height}`;
+          const sizeString = `${width.toString()}x${height.toString()}`;
           return (
-            <Select.Option value={`${width}x${height}`} key={`${width}x${height}`}>
+            <Select.Option
+              value={`${width.toString()}x${height.toString()}`}
+              key={`${width.toString()}x${height.toString()}`}
+            >
               {sizeString}
             </Select.Option>
           );

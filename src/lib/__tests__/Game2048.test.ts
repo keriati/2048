@@ -45,28 +45,25 @@ describe('Game2048', () => {
 
   describe('#moveRowLeft()', () => {
     it('moves the tiles to the left, merging numbers', () => {
-      const game = new Game2048(4, 4);
       const row = [2, 0, 2, 2];
 
-      const newRow = game.moveRowLeft(row);
+      const newRow = Game2048.moveRowLeft(row);
 
       expect(newRow).toEqual([4, 2, 0, 0]);
     });
 
     it('moves the tiles to the left, not merging numbers', () => {
-      const game = new Game2048(4, 4);
       const row = [0, 0, 0, 2];
 
-      const newRow = game.moveRowLeft(row);
+      const newRow = Game2048.moveRowLeft(row);
 
       expect(newRow).toEqual([2, 0, 0, 0]);
     });
 
     it('does not change rows containing only 0', () => {
-      const game = new Game2048(4, 4);
       const row = [0, 0, 0, 0];
 
-      const newRow = game.moveRowLeft(row);
+      const newRow = Game2048.moveRowLeft(row);
 
       expect(newRow).toEqual([0, 0, 0, 0]);
     });

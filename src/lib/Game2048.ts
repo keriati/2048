@@ -21,7 +21,7 @@ export class Game2048 {
   }
 
   createBoard() {
-    const tiles = Array(this.width * this.height).fill(0);
+    const tiles = Array<number>(this.width * this.height).fill(0);
 
     for (let i = 0; i < this.startingTwos; i++) {
       tiles[i] = 2;
@@ -61,7 +61,7 @@ export class Game2048 {
     this.board[newY][newX] = 2;
   }
 
-  moveRowLeft(row: number[]) {
+  static moveRowLeft(row: number[]) {
     const newRow = row.filter((n) => n != 0);
 
     for (let i = 0; i < newRow.length - 1; i++) {
@@ -81,25 +81,25 @@ export class Game2048 {
   }
 
   left() {
-    this.board = this.board.map(this.moveRowLeft);
+    this.board = this.board.map((row) => Game2048.moveRowLeft(row));
     this.addTwo();
   }
 
   right() {
     this.board = this.board
       .map((row) => row.reverse())
-      .map(this.moveRowLeft)
+      .map((row) => Game2048.moveRowLeft(row))
       .map((row) => row.reverse());
     this.addTwo();
   }
 
   up() {
-    this.board = rotateClockwise(rotateCounterClockwise(this.board).map(this.moveRowLeft));
+    this.board = rotateClockwise(rotateCounterClockwise(this.board).map((row) => Game2048.moveRowLeft(row)));
     this.addTwo();
   }
 
   down() {
-    this.board = rotateCounterClockwise(rotateClockwise(this.board).map(this.moveRowLeft));
+    this.board = rotateCounterClockwise(rotateClockwise(this.board).map((row) => Game2048.moveRowLeft(row)));
     this.addTwo();
   }
 
@@ -124,7 +124,7 @@ export class Game2048 {
         ];
 
         for (const [nx, ny] of nei) {
-          if (this.board?.[ny]?.[nx] === this.board?.[y]?.[x]) {
+          if (this.board[ny]?.[nx] === this.board[y]?.[x]) {
             return false;
           }
         }

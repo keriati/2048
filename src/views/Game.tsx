@@ -21,7 +21,7 @@ type GameControls = 'up' | 'down' | 'left' | 'right';
 export const Game: FC = () => {
   const [boardSize, setBoardSize] = useState(DEFAULT_SIZE);
   const [game, setGame] = useState<Game2048>(new Game2048(boardSize[0], boardSize[1], AUTOPLAY_NEW_TWO_COUNT));
-  const [board, setBoard] = useState<GameBoard>(game?.board);
+  const [board, setBoard] = useState<GameBoard>(game.board);
 
   const [won, setWon] = useState(false);
   const [lost, setLost] = useState(false);
@@ -71,13 +71,16 @@ export const Game: FC = () => {
     setBoard(newGame.board);
   };
 
-  const updateBoard = (direction: GameControls) => {
-    game[direction]();
+  const updateBoard = useCallback(
+    (direction: GameControls) => {
+      game[direction]();
 
-    setBoard(game.board);
+      setBoard(game.board);
 
-    checkGame();
-  };
+      checkGame();
+    },
+    [checkGame, game],
+  );
 
   useEffect(() => {
     if (autoPlayActive || lost || won) return;
@@ -104,9 +107,11 @@ export const Game: FC = () => {
     return () => {
       window.removeEventListener('keydown', keyDownHandler);
     };
-  }, [game, board, autoPlayActive, lost, won, checkGame]);
+  }, [game, board, autoPlayActive, lost, won, checkGame, updateBoard]);
 
-  const handleEasyMode = () => setEasyMode(!easyMode);
+  const handleEasyMode = () => {
+    setEasyMode(!easyMode);
+  };
 
   return (
     <div data-testid="game-2048">

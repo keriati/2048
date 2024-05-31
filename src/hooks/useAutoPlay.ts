@@ -9,18 +9,22 @@ export const useAutoPlay: intervalHook = (callback, delay) => {
   const [autoPlayActive, setAutoPlayActive] = useState(true);
 
   useEffect(() => {
-    if (delay !== null && autoPlayActive) {
+    if (autoPlayActive) {
       const id = setInterval(() => {
         callback(() => {
           setAutoPlayActive(false);
         });
       }, delay);
-      return () => clearInterval(id);
+      return () => {
+        clearInterval(id);
+      };
     }
   }, [delay, callback, autoPlayActive]);
 
   return {
     autoPlayActive,
-    stopAutoPlay: () => setAutoPlayActive(false),
+    stopAutoPlay: () => {
+      setAutoPlayActive(false);
+    },
   };
 };
