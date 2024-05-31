@@ -4,6 +4,6 @@
     min-width: 800px
 }
 
-.title-2048 {
+.title-2048, .subtitle-2048 {
     text-align: center;
 }

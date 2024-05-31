@@ -2,6 +2,7 @@ import { rotateClockwise, rotateCounterClockwise } from './matrix.ts';
 import { shuffleArray } from './shuffle.ts';
 
 export type GameBoard = number[][];
+export type BoardSize = [number, number];
 
 export const WIN_SCORE = 2048;
 export const HEIGHT = 6;
