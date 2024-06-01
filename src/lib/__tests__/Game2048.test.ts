@@ -254,6 +254,17 @@ describe('Game2048', () => {
       expect(game.isLostEasyMode()).toBeTruthy();
     });
 
+    it('returns true if the game is lost with obstacles', () => {
+      const game = new Game2048(3, 3);
+      game.board = [
+        [2, 1, 4],
+        [8, 1, 16],
+        [2, 16, 8],
+      ];
+
+      expect(game.isLostEasyMode()).toBeTruthy();
+    });
+
     it('returns false if the game is not lost', () => {
       const game = new Game2048(2, 2);
       game.board = [
@@ -264,7 +275,7 @@ describe('Game2048', () => {
       expect(game.isLostEasyMode()).toBeFalsy();
     });
 
-    it('returns false if the game is not lost 2', () => {
+    it('returns false if the game is not lost case 2', () => {
       const game = new Game2048(2, 2);
       game.board = [
         [2, 2],
@@ -274,11 +285,33 @@ describe('Game2048', () => {
       expect(game.isLostEasyMode()).toBeFalsy();
     });
 
-    it('returns false if the game is not lost 3', () => {
+    it('returns false if the game is not lost case 3', () => {
       const game = new Game2048(2, 2);
       game.board = [
         [0, 2],
         [4, 16],
+      ];
+
+      expect(game.isLostEasyMode()).toBeFalsy();
+    });
+
+    it('returns false if the game is not lost with obstacles, zero available', () => {
+      const game = new Game2048(3, 3);
+      game.board = [
+        [0, 1, 2],
+        [4, 1, 16],
+        [8, 1, 8],
+      ];
+
+      expect(game.isLostEasyMode()).toBeFalsy();
+    });
+
+    it('returns false if the game is not lost with obstacles, full board', () => {
+      const game = new Game2048(3, 3);
+      game.board = [
+        [4, 1, 2],
+        [4, 1, 16],
+        [8, 1, 8],
       ];
 
       expect(game.isLostEasyMode()).toBeFalsy();

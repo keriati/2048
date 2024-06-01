@@ -131,6 +131,8 @@ export class Game2048 {
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
+        if (this.board[y][x] === OBSTACLE_CODE) continue;
+
         const nei = [
           [x + 1, y],
           [x - 1, y],
