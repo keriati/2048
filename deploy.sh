@@ -18,6 +18,7 @@ echo "Creating Docker image..."
 docker build --platform=linux/amd64 -t $GAME_REGISTRY:latest .
 
 echo "Pushing Docker image to registry..."
+docker login $GAME_REGISTRY
 docker push $GAME_REGISTRY:latest
 
 echo "Container pushed!"

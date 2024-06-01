@@ -7,10 +7,22 @@ type Props = { gameBoard: GameBoard; won: boolean; lost: boolean };
 
 export const Board: FC<Props> = ({ gameBoard, won, lost }) => (
   <div className="board" data-testid={'game-board'}>
-    {won && <h1 data-testid={'game-won'}>You Win 🤩!</h1>}
-    {lost && <h1 data-testid={'game-lost'}>You loose 😭!</h1>}
+    {won && (
+      <div data-testid={'game-won'} className={'finish-title'}>
+        You Won!
+        <br />
+        Awesome!
+      </div>
+    )}
+    {lost && (
+      <div data-testid={'game-lost'} className={'finish-title'}>
+        You Lost!
+        <br />
+        Try again!
+      </div>
+    )}
     {gameBoard.map((row, rowIndex) => (
-      <div className="board-row" key={rowIndex}>
+      <div key={rowIndex}>
         {row.map((value, index) => (
           <Tile value={value} key={index} />
         ))}
