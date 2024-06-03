@@ -1,6 +1,7 @@
 import { Button, Form, Radio, Select, Switch } from 'antd';
 import { BOARD_SIZES, DEFAULT_OBSTACLES, DEFAULT_SIZE, NUM_OBSTACLES } from '../constants.ts';
-import { FC } from 'react';
+
+import type { FC } from 'react';
 import type { RadioChangeEvent } from 'antd/lib';
 
 interface Props {

@@ -1,7 +1,8 @@
 import './Board.css';
-import { FC } from 'react';
 import { Tile } from './Tile.tsx';
-import type { GameBoard } from '../lib/Game2048.ts';
+
+import type { FC } from 'react';
+import type { GameBoard } from '../types/Game2048.ts';
 
 type Props = { gameBoard: GameBoard; won: boolean; lost: boolean };
 

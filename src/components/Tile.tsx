@@ -1,5 +1,5 @@
 import './Tile.css';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 type Props = { value: number };
 

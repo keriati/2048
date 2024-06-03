@@ -1,4 +1,4 @@
-import type { BoardSize } from './lib/Game2048.ts';
+import type { BoardSize } from './types/Game2048.ts';
 
 export const KEY_LEFT = 'ArrowLeft';
 export const KEY_UP = 'ArrowUp';
@@ -20,6 +20,8 @@ export const BOARD_SIZES: BoardSize[] = [
   [5, 5],
 ];
 export const DEFAULT_SIZE: BoardSize = [6, 6];
+
+export const DEFAULT_STARTING_TWOS = 1;
 
 export const DEFAULT_OBSTACLES = 0;
 export const NUM_OBSTACLES = [0, 1, 2, 3, 4];

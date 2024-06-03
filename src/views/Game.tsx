@@ -1,7 +1,11 @@
 import './Game.css';
-import { FC, useCallback, useEffect, useState } from 'react';
-import { Game2048, GameBoard } from '../lib/Game2048.ts';
+import type { FC } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Board } from '../components/Board.tsx';
+import { parseSize } from './GameServices.ts';
+import { useAutoPlay } from '../hooks/useAutoPlay.ts';
+import { Header } from '../components/Header.tsx';
+import { Controls } from '../components/Controls.tsx';
 import {
   AUTOPLAY_INPUT_DELAY,
   DEFAULT_OBSTACLES,
@@ -11,17 +15,16 @@ import {
   KEY_RIGHT,
   KEY_UP,
 } from '../constants.ts';
-import { parseSize } from './GameServices.ts';
-import { useAutoPlay } from '../hooks/useAutoPlay.ts';
-import { Header } from '../components/Header.tsx';
-import { Controls } from '../components/Controls.tsx';
 import type { RadioChangeEvent } from 'antd/lib';
+import type { GameBoard, GameControls, IGame2048 } from '../types/Game2048.ts';
 
-type GameControls = 'up' | 'down' | 'left' | 'right';
+type Props = {
+  game: IGame2048;
+  setGame: (game: IGame2048) => void;
+  startNewGame: (width: number, height: number, startingTwos: number, obstacles: number) => IGame2048;
+};
 
-type Props = { game: Game2048; setGame: (game: Game2048) => void };
-
-export const Game: FC<Props> = ({ game, setGame }) => {
+export const Game: FC<Props> = ({ game, setGame, startNewGame }) => {
   const [boardSize, setBoardSize] = useState(DEFAULT_SIZE);
   const [obstacles, setObstacles] = useState(DEFAULT_OBSTACLES);
   const [board, setBoard] = useState<GameBoard>(game.board);
@@ -76,7 +79,7 @@ export const Game: FC<Props> = ({ game, setGame }) => {
     setLost(false);
     setWon(false);
 
-    const newGame = new Game2048(boardSize[0], boardSize[1], 1, obstacles);
+    const newGame = startNewGame(boardSize[0], boardSize[1], 1, obstacles);
     setGame(newGame);
     setBoard(newGame.board);
   };

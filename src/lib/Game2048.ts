@@ -1,8 +1,7 @@
 import { rotateClockwise, rotateCounterClockwise } from './matrix.ts';
-import { joinArrays, splitArray, shuffleArray } from './array.ts';
+import { joinArrays, shuffleArray, splitArray } from './array.ts';
 
-export type GameBoard = number[][];
-export type BoardSize = [number, number];
+import type { GameBoard, IGame2048 } from '../types/Game2048.ts';
 
 export const WIN_SCORE = 2048;
 export const HEIGHT = 6;
@@ -11,14 +10,14 @@ export const STARTING_TWOS = 1;
 export const STARTING_OBSTACLES = 0;
 export const OBSTACLE_CODE = 1;
 
-export class Game2048 {
+export class Game2048 implements IGame2048 {
   board: GameBoard = [];
 
   constructor(
-    public readonly width = WIDTH,
-    public readonly height = HEIGHT,
-    public readonly startingTwos: number = STARTING_TWOS,
-    public readonly obstacles: number = STARTING_OBSTACLES,
+    readonly width = WIDTH,
+    readonly height = HEIGHT,
+    readonly startingTwos = STARTING_TWOS,
+    readonly obstacles = STARTING_OBSTACLES,
   ) {
     this.createBoard();
   }

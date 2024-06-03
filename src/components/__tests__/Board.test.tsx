@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
-import { Game2048, GameBoard } from '../../lib/Game2048.ts';
+import { Game2048 } from '../../lib/Game2048.ts';
 import { Board } from '../Board.tsx';
+import type { GameBoard } from '../../types/Game2048.ts';
 
 describe('Board component', () => {
   let game: Game2048;
